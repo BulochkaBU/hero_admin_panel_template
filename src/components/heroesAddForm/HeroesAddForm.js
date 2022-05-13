@@ -14,7 +14,7 @@ import { heroAdded, heroesFetchingError} from '../../actions';
 // данных из фильтров
 
 const HeroesAddForm = () => {
-    const {filters} = useSelector(state => state);
+    const {filters} = useSelector(state => state.filters);
     const dispatch = useDispatch();
     const {request} = useHttp();
     const [newHero, setNewHero] = useState({id: '', name: '', description: '', element: ''})    
