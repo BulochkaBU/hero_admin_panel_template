@@ -14,7 +14,7 @@ import { filterFetched,filterActive, heroesFetched, heroesFiltered} from '../../
 // Представьте, что вы попросили бэкенд-разработчика об этом
 
 const HeroesFilters = () => {
-    const {filters, activeFilter} = useSelector(state => state)
+    const {filters} = useSelector(state => state)
     const {request} = useHttp();
     const dispatch = useDispatch();
 

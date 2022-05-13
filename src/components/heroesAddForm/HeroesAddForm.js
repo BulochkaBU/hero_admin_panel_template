@@ -1,8 +1,8 @@
 import { v4 as uuidv4 } from 'uuid';
 import { useDispatch, useSelector } from 'react-redux';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useHttp } from '../../hooks/http.hook';
-import { heroAdded, heroesFetchingError, filterFetched} from '../../actions';
+import { heroAdded, heroesFetchingError} from '../../actions';
 // Задача для этого компонента:
 // Реализовать создание нового героя с введенными данными. Он должен попадать
 // в общее состояние и отображаться в списке + фильтроваться
@@ -17,9 +17,7 @@ const HeroesAddForm = () => {
     const {filters} = useSelector(state => state);
     const dispatch = useDispatch();
     const {request} = useHttp();
-    const [newHero, setNewHero] = useState({id: '', name: '', description: '', element: ''})
-
-    
+    const [newHero, setNewHero] = useState({id: '', name: '', description: '', element: ''})    
 
     const onNewHero = (e) => {
         setNewHero({...newHero,
@@ -38,14 +36,10 @@ const HeroesAddForm = () => {
         
         setNewHero({id: '', name: '', description: '', element: ''})
       
-    } 
-
-
-
+    }
 
     const renderFilters= (arr) => {
         return arr.map(el => {
-
             // eslint-disable-next-line
             if (el.name === 'all') return 
             
@@ -53,9 +47,7 @@ const HeroesAddForm = () => {
         })
         
     }
-    const newFilters = renderFilters(filters)
-    
-    
+    const newFilters = renderFilters(filters)    
 
     return (
         <form onSubmit={onAddNewHero} className="border p-4 shadow-lg rounded">
