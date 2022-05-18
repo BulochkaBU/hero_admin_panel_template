@@ -14,51 +14,15 @@ export const fetchFilters = (request) => (dispatch) => {
 
 
 export const heroesFetching = createAction('HEROES_FETCHING')
-// export const heroesFetching = () => {
-//     return {
-//         type: 'HEROES_FETCHING'
-//     }
-// }
-
 
 export const heroesFetched = createAction('HEROES_FETCHED')
-// export const heroesFetched = (heroes) => {
-//     return {
-//         type: 'HEROES_FETCHED',
-//         payload: heroes
-//     }
-// }
 
-export const heroesFetchingError = () => {
-    return {
-        type: 'HEROES_FETCHING_ERROR'
-    }
-}
+export const heroesFetchingError = createAction('HEROES_FETCHING_ERROR')
 
-export const heroesDeleted = (id) => {
-    return {
-        type: 'HEROES_DELETED',
-        payload: id
-    }    
-}
+export const heroesDeleted = createAction('HEROES_DELETED')
 
-export const heroAdded = (newHero) => {
-    return {
-        type: 'HERO_ADDED',
-        payload: newHero
-    }    
-}
+export const heroAdded = createAction('HERO_ADDED')
 
-export const filterActive = (newFilter) => {
-    return {
-        type: 'FILTER_ACTIVE',
-        payload: newFilter
-    }    
-}
+export const filterActive = createAction('FILTER_ACTIVE')
 
-export const filterFetched = (filter) => {
-    return {
-        type: 'FILTERS',
-        payload: filter
-    }    
-}
+export const filterFetched = createAction('FILTERS')
