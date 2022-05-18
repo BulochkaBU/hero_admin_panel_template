@@ -7,16 +7,22 @@
       "element": "water"
     },
     {
-      "id": "d4af0540-59d1-4d28-84aa-a0efb1f586a9",
-      "name": "banned_users",
-      "description": "bann",
-      "element": "wind"
-    },
-    {
       "id": "243646e8-b214-42cd-83a7-55a5d2e7da23",
       "name": "Captain Flint",
       "description": "fggcgv hb",
       "element": "fire"
+    },
+    {
+      "id": "cae6a119-8657-4dc9-b2ac-1105dceb7e54",
+      "name": "SUPERNAUT",
+      "description": "ычясч",
+      "element": "wind"
+    },
+    {
+      "id": "336c93ac-04e1-41fa-8bd1-0ae190491f76",
+      "name": "User30",
+      "description": "sdfvvvv",
+      "element": "earth"
     }
   ],
   "filters": [

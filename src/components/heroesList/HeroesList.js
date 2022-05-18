@@ -2,7 +2,7 @@ import {useHttp} from '../../hooks/http.hook';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
-import { heroesFetching, heroesFetched, heroesFetchingError, heroesDeleted} from '../../actions';
+import { fetchHeroes, heroesDeleted} from '../../actions';
 import HeroesListItem from "../heroesListItem/HeroesListItem";
 import Spinner from '../spinner/Spinner';
 
@@ -18,7 +18,7 @@ const HeroesList = () => {
         (state) => state.heroes.heroes,
         (filter, heroes) => {
             if (filter === 'all'){
-                console.log('render') // при таком методе селектор мемоизирует данные
+                // console.log('render') // при таком методе селектор мемоизирует данные
                 return heroes
             } else {
                 return heroes.filter(item => item.element === filter)
@@ -41,10 +41,12 @@ const HeroesList = () => {
     const {request} = useHttp();
 
     useEffect(() => {
-        dispatch('HEROES_FETCHING');
-        request("http://localhost:3001/heroes", 'GET')
-            .then(data => dispatch(heroesFetched(data)))
-            .catch(() => dispatch(heroesFetchingError()))
+        dispatch(fetchHeroes(request))
+        // // dispatch('HEROES_FETCHING'); // передается строка, когда применяем applymiddleware
+        // dispatch(heroesFetching) // можем передать функцию, тк подключили reduxThunk
+        // request("http://localhost:3001/heroes", 'GET')
+        //     .then(data => dispatch(heroesFetched(data)))
+        //     .catch(() => dispatch(heroesFetchingError()))
 
         // eslint-disable-next-line
     }, []);
