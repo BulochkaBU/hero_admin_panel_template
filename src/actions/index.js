@@ -1,4 +1,6 @@
-import { createAction } from "@reduxjs/toolkit"
+import { heroesFetched, heroesFetching,  heroesFetchingError} from "../components/heroesList/heroesSlice"
+import { filterFetched } from "../components/heroesFilters/filtersSlice"
+
 
 export const fetchHeroes = (request) => (dispatch) => {
     dispatch(heroesFetching())
@@ -13,16 +15,4 @@ export const fetchFilters = (request) => (dispatch) => {
 }
 
 
-export const heroesFetching = createAction('HEROES_FETCHING')
 
-export const heroesFetched = createAction('HEROES_FETCHED')
-
-export const heroesFetchingError = createAction('HEROES_FETCHING_ERROR')
-
-export const heroesDeleted = createAction('HEROES_DELETED')
-
-export const heroAdded = createAction('HERO_ADDED')
-
-export const filterActive = createAction('FILTER_ACTIVE')
-
-export const filterFetched = createAction('FILTERS')
