@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import {useHttp} from '../../hooks/http.hook';
 import {filterActive, fetchFilters, selectAll} from './filtersSlice'
 import store from '../../store';
 // Задача для этого компонента:
@@ -11,16 +10,11 @@ import store from '../../store';
 // Представьте, что вы попросили бэкенд-разработчика об этом
 
 const HeroesFilters = () => {
-    // const filters = useSelector(selectAll)
-    const {filtersLoadingStatus, activeFilter} = useSelector(state => state.filter);
+    const {activeFilter} = useSelector(state => state.filter);
     const filters = selectAll(store.getState());
-
-    const {request} = useHttp();
     const dispatch = useDispatch();
 
     useEffect(() => {
-        // request("http://localhost:3001/filters", 'GET')
-        // .then(data => dispatch(filterFetched(data)))
         dispatch(fetchFilters())
     },[])
 

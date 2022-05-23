@@ -2,9 +2,9 @@ import { v4 as uuidv4 } from 'uuid';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import { useHttp } from '../../hooks/http.hook';
-import { heroAdded, heroesFetchingError} from '../heroesList/heroesSlice';
 import {selectAll} from '../heroesFilters/filtersSlice'
-import store from '../../store'
+import { useCreateHeroMutation } from '../../api/apiSlice';
+
 // Задача для этого компонента:
 // Реализовать создание нового героя с введенными данными. Он должен попадать
 // в общее состояние и отображаться в списке + фильтроваться
@@ -17,10 +17,9 @@ import store from '../../store'
 
 const HeroesAddForm = () => {
     const filters = useSelector(selectAll)
-
-    const dispatch = useDispatch();
-    const {request} = useHttp();
     const [newHero, setNewHero] = useState({id: '', name: '', description: '', element: ''})    
+
+    const [createHero, {isLoading}] = useCreateHeroMutation()
 
     const onNewHero = (e) => {
         setNewHero({...newHero,
@@ -31,12 +30,7 @@ const HeroesAddForm = () => {
 
     const onAddNewHero = (e) => {
         e.preventDefault();
-        //dispatch(heroAdded(heroes, newHero))
-        request("http://localhost:3001/heroes/", 'POST', JSON.stringify(newHero))
-
-            .then(dispatch(heroAdded(newHero)))
-            .catch(() => dispatch(heroesFetchingError()))
-        
+        createHero(newHero).unwrap()
         setNewHero({id: '', name: '', description: '', element: ''})
       
     }

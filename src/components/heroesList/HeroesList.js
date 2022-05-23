@@ -1,9 +1,8 @@
-import {useHttp} from '../../hooks/http.hook';
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import {heroesDeleted, fetchHeroes, filteredHeroesSelector} from './heroesSlice'
+import {useMemo } from 'react';
+import { useSelector } from 'react-redux';
 import HeroesListItem from "../heroesListItem/HeroesListItem";
 import Spinner from '../spinner/Spinner';
+import {useGetHeroesQuery, useDeleteHeroMutation} from '../../api/apiSlice'
 
 // Задача для этого компонента:
 // При клике на "крестик" идет удаление персонажа из общего состояния
@@ -12,44 +11,36 @@ import Spinner from '../spinner/Spinner';
 
 const HeroesList = () => {
 
-    // const filteredHeroes = useSelector(state => {
-    //     if (state.filters.activeFilter === 'all'){
-    //         console.log('render') // при таком методе будет селектор вызываться каждый раз, страдает оптимизация
-    //         return state.heroes.heroes
-    //     } else {
-    //         return state.heroes.heroes.filter(item => item.element === state.filters.activeFilter)
-    //     }
-    // });
+    const {
+        isLoading,
+        isFetching,
+        isError,
+        data: heroes = []
 
-    const filteredHeroes = useSelector(filteredHeroesSelector)
-    const {heroesLoadingStatus} = useSelector(state => state.heroes.heroesLoadingStatus);
-    const dispatch = useDispatch();
-    const {request} = useHttp();
+    } = useGetHeroesQuery()
 
-    useEffect(() => {
-        dispatch(fetchHeroes())
-        // // dispatch('HEROES_FETCHING'); // передается строка, когда применяем applymiddleware
-        // dispatch(heroesFetching) // можем передать функцию, тк подключили reduxThunk
-        // request("http://localhost:3001/heroes", 'GET')
-        //     .then(data => dispatch(heroesFetched(data)))
-        //     .catch(() => dispatch(heroesFetchingError()))
+    const activeFilter = useSelector(state => state.filter.activeFilter)
 
-        // eslint-disable-next-line
-    }, []);
+    const [deleteHero] = useDeleteHeroMutation()
 
+    const filteredHeroes = useMemo(() => {
+        const filteredHeroes = heroes.slice()
 
-    if (heroesLoadingStatus === "loading") {
+        if (activeFilter === 'all'){
+            return filteredHeroes
+        } else {
+            return filteredHeroes.filter(item => item.element === activeFilter)
+        }
+    }, [heroes, activeFilter])
+
+    if (isLoading || isFetching) {
         return <Spinner/>;
-    } else if (heroesLoadingStatus === "error") {
+    } else if (isError) {
         return <h5 className="text-center mt-5">Ошибка загрузки</h5>
     }
 
-
     const onDelete = (id) => {
-        // dispatch(heroesDeleted(heroes, id));
-        request("http://localhost:3001/heroes/" + id, 'DELETE')
-        dispatch(heroesDeleted(id));
-        
+        deleteHero(id)        
     }   
     
     const renderHeroesList = (arr) => {
