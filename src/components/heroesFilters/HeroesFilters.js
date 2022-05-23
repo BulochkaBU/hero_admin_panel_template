@@ -11,11 +11,10 @@ import store from '../../store';
 // Представьте, что вы попросили бэкенд-разработчика об этом
 
 const HeroesFilters = () => {
-    const filters = useSelector(selectAll)
-    // const {filtersLoadingStatus, activeFilter} = useSelector(state => state.filters);
-    // const filters = selectAll(store.getState());
+    // const filters = useSelector(selectAll)
+    const {filtersLoadingStatus, activeFilter} = useSelector(state => state.filter);
+    const filters = selectAll(store.getState());
 
-    console.log(filters)
     const {request} = useHttp();
     const dispatch = useDispatch();
 

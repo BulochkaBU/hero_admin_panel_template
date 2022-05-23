@@ -1,12 +1,6 @@
 {
   "heroes": [
     {
-      "id": "243646e8-b214-42cd-83a7-55a5d2e7da23",
-      "name": "Captain Flint",
-      "description": "fggcgv hb",
-      "element": "fire"
-    },
-    {
       "id": "35631128-2b5e-477f-a9d0-7a20ec58809f",
       "name": "User30",
       "description": "dcxfv",
@@ -17,10 +11,17 @@
       "name": "User30",
       "description": "scs",
       "element": "water"
+    },
+    {
+      "id": "40c8472b-5ebf-4187-9091-19be88dfa9fe",
+      "name": "xxxxxx",
+      "description": "vvvvvvv",
+      "element": "fire"
     }
   ],
   "filters": [
-    { "id": "all",
+    {
+      "id": "all",
       "label": "Все",
       "name": "all",
       "classNames": "btn btn-outline-dark active"

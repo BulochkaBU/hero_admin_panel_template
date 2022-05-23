@@ -17,6 +17,7 @@ import store from '../../store'
 
 const HeroesAddForm = () => {
     const filters = useSelector(selectAll)
+
     const dispatch = useDispatch();
     const {request} = useHttp();
     const [newHero, setNewHero] = useState({id: '', name: '', description: '', element: ''})    

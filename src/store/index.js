@@ -34,7 +34,7 @@ const stringMiddleware = () => (dispatch) => (action) => {
 //                             window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()));
 
 const store = configureStore({
-    reducer: {heroes, filters},
+    reducer: {heroes, filter: filters},
     middleware: getDefaultMiddleware => getDefaultMiddleware().concat(stringMiddleware),
     devTools: process.env.NODE_ENV !== 'production'
 })
