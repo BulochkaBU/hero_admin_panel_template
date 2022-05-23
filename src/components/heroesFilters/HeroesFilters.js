@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import {useHttp} from '../../hooks/http.hook';
-import {filterActive, fetchFilters} from './filtersSlice'
-
+import {filterActive, fetchFilters, selectAll} from './filtersSlice'
+import store from '../../store';
 // Задача для этого компонента:
 // Фильтры должны формироваться на основании загруженных данных
 // Фильтры должны отображать только нужных героев при выборе
@@ -11,7 +11,11 @@ import {filterActive, fetchFilters} from './filtersSlice'
 // Представьте, что вы попросили бэкенд-разработчика об этом
 
 const HeroesFilters = () => {
-    const {filters} = useSelector(state => state.filters)
+    const filters = useSelector(selectAll)
+    // const {filtersLoadingStatus, activeFilter} = useSelector(state => state.filters);
+    // const filters = selectAll(store.getState());
+
+    console.log(filters)
     const {request} = useHttp();
     const dispatch = useDispatch();
 

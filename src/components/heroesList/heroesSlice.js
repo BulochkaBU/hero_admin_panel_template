@@ -1,12 +1,13 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, createEntityAdapter} from "@reduxjs/toolkit";
 import {useHttp} from '../../hooks/http.hook';
+import { createSelector } from '@reduxjs/toolkit';
+const heroesAdapter = createEntityAdapter()
+
+const initialState = heroesAdapter.getInitialState({
+    heroesLoadingStatus: 'idle'
+})
 
 
-
-const initialState = {
-    heroes: [],
-    heroesLoadingStatus: 'idle',
-}
 export const fetchHeroes = createAsyncThunk(
     'heroes/fetchHeroes',
     () => {
@@ -15,21 +16,17 @@ export const fetchHeroes = createAsyncThunk(
     }
 )
 
-
-
-
-
 const heroesSlice = createSlice({
     name: 'heroes',
     initialState,
     reducers: {
         heroesDeleted: (state, action) => {
             state.heroesLoadingStatus = 'idle';
-            state.heroes = state.heroes.filter(item => action.payload !== item.id);
+            heroesAdapter.removeOne(state, action.payload);
         },
         heroAdded: (state, action) => {
             state.heroesLoadingStatus = 'idle';
-            state.heroes.push(action.payload);
+            heroesAdapter.addOne(state, action.payload);
         },
     },
     extraReducers: (builder) => {
@@ -37,7 +34,7 @@ const heroesSlice = createSlice({
             .addCase(fetchHeroes.pending, state => {state.heroesLoadingStatus = 'loading'})
             .addCase(fetchHeroes.fulfilled, (state, action) => {
                 state.heroesLoadingStatus = 'idle';
-                state.heroes = action.payload;
+                heroesAdapter.setAll(state, action.payload)
             })
             .addCase(fetchHeroes.rejected, state => {
                 state.heroesLoadingStatus = 'error'
@@ -46,8 +43,26 @@ const heroesSlice = createSlice({
     }
 })
 
+
+
 const {actions, reducer} = heroesSlice;
 export default reducer;
+
+export const {selectAll} = heroesAdapter.getSelectors(state => state.heroes)
+
+export const filteredHeroesSelector = createSelector(
+    (state) => state.filters.activeFilter,
+    selectAll,
+    (filter, heroes) => {
+        if (filter === 'all'){
+            // console.log('render') // при таком методе селектор мемоизирует данные
+            return heroes
+        } else {
+            return heroes.filter(item => item.element === filter)
+        }
+    }
+)
+
 export const {
     heroesFetching,
     heroesFetched,

@@ -1,12 +1,6 @@
 {
   "heroes": [
     {
-      "id": "a861e58f-7b54-42b3-b039-c8406f3aca59",
-      "name": "User15",
-      "description": "water",
-      "element": "water"
-    },
-    {
       "id": "243646e8-b214-42cd-83a7-55a5d2e7da23",
       "name": "Captain Flint",
       "description": "fggcgv hb",
@@ -19,40 +13,38 @@
       "element": "wind"
     },
     {
-      "id": "17da3942-efe3-45a3-8119-bafa4be5f779",
-      "name": "SUPERNAUT",
-      "description": "sdfcv",
-      "element": "earth"
-    },
-    {
-      "id": "476803ce-93d3-45bf-8343-a9af81e241db",
-      "name": "User6",
-      "description": "asdfg",
-      "element": "wind"
+      "id": "f2e08955-7786-44a5-a5ee-b180fcdfb425",
+      "name": "User30",
+      "description": "scs",
+      "element": "water"
     }
   ],
   "filters": [
-    {
+    { "id": "all",
       "label": "Все",
       "name": "all",
       "classNames": "btn btn-outline-dark active"
     },
     {
+      "id": "fire",
       "label": "Огонь",
       "name": "fire",
       "classNames": "btn btn-danger"
     },
     {
+      "id": "water",
       "label": "Вода",
       "name": "water",
       "classNames": "btn btn-primary"
     },
     {
+      "id": "wind",
       "label": "Ветер",
       "name": "wind",
       "classNames": "btn btn-success"
     },
     {
+      "id": "earth",
       "label": "Земля",
       "name": "earth",
       "classNames": "btn btn-secondary"
