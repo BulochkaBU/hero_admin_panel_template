@@ -1,7 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useState } from 'react';
-import { useHttp } from '../../hooks/http.hook';
 import {selectAll} from '../heroesFilters/filtersSlice'
 import { useCreateHeroMutation } from '../../api/apiSlice';
 

@@ -1,4 +1,4 @@
-import {useMemo } from 'react';
+import {useMemo} from 'react';
 import { useSelector } from 'react-redux';
 import HeroesListItem from "../heroesListItem/HeroesListItem";
 import Spinner from '../spinner/Spinner';
@@ -54,7 +54,7 @@ const HeroesList = () => {
     }
 
     const elements = renderHeroesList(filteredHeroes);
-    
+
     return (
         <ul>
             {elements}
